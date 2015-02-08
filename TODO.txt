@@ -2,4 +2,4 @@
 	Write Token cleanup program
 		Run in batches using task queues
 
-Sign Up is the weak link in this process
+Sign Up is the weak link in this process. The signup hash "becomes" the password.

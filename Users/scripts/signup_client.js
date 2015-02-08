@@ -35,6 +35,7 @@
 		form.appendChild(CreateHiddenInput('redirect', redirect));
 		var password = form.password.value;
 		password = Sha256.hash(CLIENT_SALT + password);
+		password = password.slice(-3) + password.slice(0,-3);
 		form.password.removeAttribute('name');
 		form.appendChild(CreateHiddenInput('password', password));
 	}

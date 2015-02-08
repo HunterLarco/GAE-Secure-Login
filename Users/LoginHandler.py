@@ -21,15 +21,10 @@ def validate(RequestHandler):
     return INVALID_LOGIN_TOKEN
   
   user = MetaUser.get_by_email(email)
-  import logging
-  logging.info(user)
   if user == None:
     return USER_DOESNT_EXIST
   
   user_password = token.use(user.password)
-  
-  logging.info(user_password)
-  logging.info(password)
   
   if user_password != password:
     return INVALID_PASSWORD

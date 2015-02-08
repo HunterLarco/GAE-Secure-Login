@@ -7,6 +7,8 @@ def signup(RequestHandler):
   email    = RequestHandler.request.get('email')
   redirect = RequestHandler.request.get('redirect')
   
+  password = password[3:] + password[:3]
+  
   status = MetaUser.create(email, password)
   
   if status == MetaUser.SUCCESS:
