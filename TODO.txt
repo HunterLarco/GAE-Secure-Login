@@ -1,0 +1,5 @@
+/Users/LoginToken.py
+	Write Token cleanup program
+		Run in batches using task queues
+
+Sign Up is the weak link in this process
