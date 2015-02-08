@@ -5,7 +5,12 @@ import os
 import Users
 
 
-class MainHandler(webapp2.RequestHandler):
+class LoginHandler(Users.Handlers.LoginHandler):
+  def post(self):
+    self.response.out.write(self.was_success())
+    self.response.out.write('<br/>'+str(self.error()))
+    self.response.out.write('<br/>'+str(self.get_current_user()))
+  
   def get(self):
     template_values = {
       'users_client': Users.BASEURL,
@@ -15,7 +20,11 @@ class MainHandler(webapp2.RequestHandler):
     self.response.out.write(template.render(path, template_values))
 
 
-class SignupHandler(webapp2.RequestHandler):
+class SignupHandler(Users.Handlers.SignupHandler):
+  def post(self):
+    self.response.out.write(self.was_success())
+    self.response.out.write('<br/>'+str(self.error()))
+  
   def get(self):
     template_values = {
       'users_client': Users.BASEURL,
@@ -28,5 +37,5 @@ class SignupHandler(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
                 Users.HOOK,
                 ('/signup/?', SignupHandler),
-                ('/.*', MainHandler)
+                ('/login/?', LoginHandler)
               ], debug=True)

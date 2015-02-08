@@ -6,8 +6,7 @@
 	
 	// NEVER change the CLIENT_SALT
 	const CLIENT_SALT = '(*$NBF@'
-	const BASEURL = '{{BASEURL}}';
-	const URL_SCHEME = new RegExp('^'+BASEURL+'/signup\\?redirect=(.*)$')
+	const URL_SCHEME = new RegExp('^users.signup:(.*)$')
 	
 	// Finds all forms with a login url
 	function FindForms(){
@@ -25,14 +24,13 @@
 				matches = dest.match(URL_SCHEME),
 				redirect = matches[1];
 		form.addEventListener('submit', function(){
-			SetupSignupParameters(form, redirect);
+			SetupSignupParameters(form);
 		});
 		form.setAttribute('method', 'POST');
-		form.setAttribute('action', BASEURL+'/signup')
+		form.setAttribute('action', redirect)
 	}
 	
 	function SetupSignupParameters(form, redirect){
-		form.appendChild(CreateHiddenInput('redirect', redirect));
 		var password = form.password.value;
 		password = Sha256.hash(CLIENT_SALT + password);
 		password = password.slice(-3) + password.slice(0,-3);
